@@ -6,6 +6,11 @@ $.getJSON("favs.dump.json", function(data) {
         teamNames.push(key);
     });
     teamNames.sort();
+    teamNames.sort(function(t1, t2) {
+        var v1 = data.teams[t1];
+        var v2 = data.teams[t2];
+        return v2[v2.length - 1] - v1[v1.length - 1];
+    })
 
     var maxValues = [];
     for (var i = 0; i < teamNames.length; i++) {
@@ -41,7 +46,9 @@ $.getJSON("favs.dump.json", function(data) {
                     labels: labels,
                     drawGrid: false,
                     stepPlot: true,
-                    strokeWidth: 1,
+                    strokeWidth: 2,
+                    strokeBorderWidth: 1,
+                    rightGap: 10,
                     legend: "always",
                     labelsDiv: "legend",
                     labelsSeparateLines: true,
