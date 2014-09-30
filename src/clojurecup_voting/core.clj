@@ -61,6 +61,8 @@
   (try (let [dump-str (slurp dump-filename)
              raw-dump (json/decode dump-str)
              keywordized (into {} (map (fn [[k v]] [(keyword k) v]) raw-dump))]
-         (reset! data-store keywordized)))
+         (reset! data-store keywordized))
+       (catch java.io.FileNotFoundException e
+         :ok))
   (println "starting main loop...")
   (<!! (main-loop)))
